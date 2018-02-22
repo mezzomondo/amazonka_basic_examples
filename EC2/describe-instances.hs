@@ -4,13 +4,13 @@
 {-
 Examples:
 
-- Returns all the images:
+- Describes all the instances:
 $ stack describe-instances.hs
 
-- Returns a specific image:
+- Describes a specific instance:
 $ stack describe-instances.hs --instance_ids <instance-id>
 
-- Returns multiple images at once:
+- Describes multiple instances at once:
 $ stack describe-instances.hs --instance_ids <instance-id1> --instance_ids <instance-id2> --instance_ids <instance-id3>
 -}
 

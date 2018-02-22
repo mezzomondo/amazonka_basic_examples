@@ -4,10 +4,10 @@
 {-
 Example:
 
-- Returns tags for the instance-id:
+- Describe tags for the instance-id:
 $ stack describe-tags.hs --resource_type instance --resource_id <instance-id>
 
-- Returns tags for the AMI-id:
+- Describe tags for the AMI-id:
 $ stack describe-tags.hs --resource_type image --resource_id <AMI-id>
 -}
 

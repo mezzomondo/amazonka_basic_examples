@@ -1,7 +1,7 @@
 -- stack --resolver lts-10.4 script
 
 {-
-Examples:
+Example:
 
 - Lists all the buckets:
 $ stack list-buckets.hs

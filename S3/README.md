@@ -5,4 +5,8 @@ This scripts are basic interface examples with S3, make sure to have [stack](htt
 * List all the buckets.
 ```
 $ stack list-buckets.hs
+``
+* Put the script itself in an existing bucket.
+```
+$ stack put-object.hs --bucket <bucket>
 ```

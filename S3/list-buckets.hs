@@ -8,8 +8,6 @@ $ stack list-buckets.hs
 
 -}
 
-{-# LANGUAGE OverloadedStrings #-}
-
 module Main where
 
 import Control.Lens

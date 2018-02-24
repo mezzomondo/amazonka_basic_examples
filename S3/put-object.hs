@@ -21,9 +21,7 @@ import Network.AWS.S3
 import Options.Generic
 import System.IO
 
-data Options = Options {
-    bucket    :: Text
-} deriving (Generic, Show)
+newtype Options = Options {bucket :: Text} deriving (Generic, Show)
 
 instance ParseRecord Options
 

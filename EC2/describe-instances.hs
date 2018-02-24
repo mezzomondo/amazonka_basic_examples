@@ -25,8 +25,7 @@ import Network.AWS
 import Network.AWS.EC2
 import Options.Generic
 
-data Options = Options { instance_ids :: [Text]
-  } deriving (Generic, Show)
+newtype Options = Options { instance_ids :: [Text]} deriving (Generic, Show)
 
 instance ParseRecord Options
 

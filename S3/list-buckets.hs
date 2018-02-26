@@ -1,3 +1,4 @@
+#!/usr/bin/env stack
 -- stack --resolver lts-10.4 script
 
 {-

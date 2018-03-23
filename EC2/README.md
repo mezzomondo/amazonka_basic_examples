@@ -30,3 +30,11 @@ $ stack describe-instances.hs --instance_ids <instance-id>
 ```
 $ stack describe-instances.hs --instance_ids <instance-id1> --instance_ids <instance-id2> --instance_ids <instance-id3>
 ```
+* Create instance, dry run is set so no action will take place.
+```
+$ stack create-instance.hs --ami_id <ami-id> --subnet_id <subnet-id>
+```
+* Create instance and wait until is available, dry run is NOT set so action WILL take place.
+```
+$ stack create-instance-await.hs --ami_id <ami-id> --subnet_id <subnet-id>
+```

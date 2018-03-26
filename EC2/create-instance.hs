@@ -16,7 +16,7 @@ $ stack create-instance.hs --ami_id <ami-id> --subnet_id <subnet-id>
 module Main where
 
 import Control.Lens
-import Data.Text
+import Data.Text hiding (map)
 import Network.AWS
 import Network.AWS.EC2
 import Options.Generic
@@ -44,5 +44,8 @@ main = do
         send $ runInstances amiId 1 1
             & rInstanceType .~ Just T2_Nano
             & rSubnetId .~ Just subnetId
-            & rDryRun .~ Just True
-    print inst
+    --        & rDryRun .~ Just True
+    let newInstanceId = map (view insInstanceId) (inst ^. rInstances)
+    nonso <- runResourceT . runAWS env . within Frankfurt $
+        await instanceRunning $ describeInstances & diiInstanceIds .~ newInstanceId
+    print nonso

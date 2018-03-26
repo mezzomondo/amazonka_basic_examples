@@ -16,12 +16,10 @@ $ stack create-instance-await.hs --ami_id <ami-id> --subnet_id <subnet-id>
 
 module Main where
 
-import Control.Monad
 import Control.Lens
 import Data.Text hiding (map)
 import Network.AWS
 import Network.AWS.EC2
-import Network.AWS.Waiter
 import Options.Generic
 
 data Options = Options {
@@ -43,14 +41,13 @@ main = do
     let amiId = getAmiId options
     let subnetId = getSubnetId options
     env <- newEnv Discover
-    res <- runResourceT . runAWS env . within Frankfurt $ do
-        inst <- trying _Error $ send $ runInstances amiId 1 1
+    inst <- runResourceT . runAWS env . within Frankfurt $
+        send $ runInstances amiId 1 1
             & rInstanceType .~ Just T2_Nano
             & rSubnetId .~ Just subnetId
-        case inst of
-            Right r -> do
-                let newInstanceId = map (view insInstanceId) (r ^. rInstances)
-                accept <- await instanceRunning { _waitAttempts = 1 } $ describeInstances & diiInstanceIds .~ newInstanceId
-                return $ Right r
-            Left err -> return $ Left $ show err
-    print res
+    print inst
+    print "Now we wait until instance is running..."
+    let newInstanceId = map (view insInstanceId) (inst ^. rInstances)
+    accept <- runResourceT . runAWS env . within Frankfurt $
+        await instanceRunning $ describeInstances & diiInstanceIds .~ newInstanceId
+    print accept
